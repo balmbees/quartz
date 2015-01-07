@@ -1,7 +1,7 @@
 module Quartz::Validations
 
   def self.check_for_go
-    go_exists = ENV['PATH'].split(File::PATH_SEPARATOR).any? do |directory|
+    go_exists = ENV['PATH'].to_s.split(File::PATH_SEPARATOR).push("/opt/go/bin").any? do |directory|
       File.exist?(File.join(directory, 'go'))
     end
 
