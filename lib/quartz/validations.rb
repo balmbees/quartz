@@ -1,7 +1,7 @@
 module Quartz::Validations
 
   def self.check_for_go
-    go_exists = ENV['PATH'].to_s.split(File::PATH_SEPARATOR).push("/opt/go/bin").any? do |directory|
+    go_exists = ENV['PATH'].to_s.split(File::PATH_SEPARATOR).push("/usr/local/go/bin").any? do |directory|
       File.exist?(File.join(directory, 'go'))
     end
 
@@ -11,7 +11,7 @@ module Quartz::Validations
   def self.check_go_quartz_version
     current_pulse = File.read(File.join(File.dirname(__FILE__), '../../go/quartz/quartz.go'))
 
-    installed_pulse_dir = ENV['GOPATH'].to_s.split(File::PATH_SEPARATOR).push("/opt/go/pkg").select do |directory|
+    installed_pulse_dir = ENV['GOPATH'].to_s.split(File::PATH_SEPARATOR).push("/opt/go/").select do |directory|
       File.exist?(File.join(directory, 'src/github.com/DavidHuie/quartz/go/quartz/quartz.go'))
     end[0]
 
